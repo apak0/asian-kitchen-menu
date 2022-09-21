@@ -82,42 +82,181 @@ const menu = [
   },
 ];
 
+let copyMenuKorea = menu.filter(item => item.category ==="Korea")
 
-          // <div class="menu-items col-lg-6 col-sm-12">
-          //   <img src="https://twoplaidaprons.com/wp-content/uploads/2020/09/tteokbokki-top-down-view-of-tteokbokki-in-a-bowl-500x500.jpg" alt="">
-          //   <div class="menu-info">
-          //     <div class="menu-title">
-          //       <h4>Tteobbokki</h4>
-          //       <h4 class="price">10.99</h4>
-          //     </div>
-          //     <div class="menu-text">
-          //       Spicy rice cakes, serving with fish cake.
-          //     </div>
-          //   </div>
-          // </div>
+console.log(copyMenuKorea)
+
+ 
 
 
-const homePage = document.querySelector(".section-center")
+// MENÜ TÜRLERİNİN SEÇİLDİĞİ BUTONLAR
 
-document.addEventListener("DOMContentLoaded", homePageMenuLoad)
+const menuButtons = document.querySelector(".btn-container")
+document.addEventListener("DOMContentLoaded", menuBottonsAdd)
+document.addEventListener("DOMContentLoaded", showAllMenu)
 
-function homePageMenuLoad(){
- menu.forEach(function(item){
+function menuBottonsAdd () {
+  menuButtons.innerHTML +=
+  `
+  <button id="all" class="all btn btn-outline-dark me-3">All</button>
+  <button id="korea" class="korea btn btn-outline-dark me-3">Korea</button>
+  <button id="japan" class="btn btn-outline-dark me-3">Japan</button>
+  <button id="china" class="btn btn-outline-dark me-3">China</button>
 
-homePage.innerHTML += `
-<div class="menu-items col-lg-6 col-sm-12">
-<img src="https://twoplaidaprons.com/wp-content/uploads/2020/09/tteokbokki-top-down-view-of-tteokbokki-in-a-bowl-500x500.jpg" class="photo" alt="">
-<div class="menu-info">
-  <div class="menu-title">
-    <h4>Tteobbokki</h4>
-    <h4 class="price">10.99</h4>
-  </div>
-  <div class="menu-text">
-    Spicy rice cakes, serving with fish cake.
-  </div>
-</div>
-</div>
-`
- })
+  `
+  
 }
+// Butonların değişkenlere atanması
+const allBtn= document.querySelector("#all");
+const koreaBtn= document.querySelector("#korea");
+const japanBtn= document.querySelector("#japan");
+const chinaBtn= document.querySelector("#china");
+
+//Sayfanın bulunduğu div'in değişkene atanması
+const homePage = document.querySelector(".section-center");
+
+// Butonlara click event eklenmesi
+allBtn.addEventListener("click", showAllMenu);
+koreaBtn.addEventListener("click", showKoreaMenu);
+japanBtn.addEventListener("click", showJapanMenu);
+chinaBtn.addEventListener("click", showChinaMenu);
+
+
+// click event eklenen butonların fonksiyonlarının yazılması
+function showAllMenu (){
+  const homePageFood = menu.map(function(item){
+  
+    homePage.innerHTML +=`
+    
+    <div class="menu-items col-lg-6 col-sm-12">
+    <img src="${item.img}" class="photo" alt="">
+    <div class="menu-info">
+      <div class="menu-title">
+        <h4>${item.title}</h4>
+        <h4 class="price">${item.price}</h4>
+      </div>
+      <div class="menu-text">
+        ${item.desc}
+      </div>
+    </div>
+  </div>
+    `
+    
+  });
+}
+
+function showKoreaMenu (){
+  const copyMenuNew =  copyMenuKorea.map(function(item){
+    
+          homePage.innerHTML +=`
+          
+          <div class="menu-items col-lg-6 col-sm-12">
+          <img src="${item.img}" class="photo" alt="">
+          <div class="menu-info">
+            <div class="menu-title">
+              <h4>${item.title}</h4>
+              <h4 class="price">${item.price}</h4>
+            </div>
+            <div class="menu-text">
+              ${item.desc}
+            </div>
+          </div>
+        </div>
+          `
+        
+      });
+
+  console.log(e.target)
+  
+}
+
+function showJapanMenu (){
+ 
+    const japanFoods = menu.map(function(item){
+      if(item.category === "Japan"){
+        homePage.innerHTML +=`
+        
+        <div class="menu-items col-lg-6 col-sm-12">
+        <img src="${item.img}" class="photo" alt="">
+        <div class="menu-info">
+          <div class="menu-title">
+            <h4>${item.title}</h4>
+            <h4 class="price">${item.price}</h4>
+          </div>
+          <div class="menu-text">
+            ${item.desc}
+          </div>
+        </div>
+      </div>
+      `
+      }
+    });
+  
+}
+
+function showChinaMenu (){
+  
+    const chinaFoods = menu.map(function(item){
+      if(item.category === "China"){
+        homePage.innerHTML +=`
+        
+        <div class="menu-items col-lg-6 col-sm-12">
+        <img src="${item.img}" class="photo" alt="">
+        <div class="menu-info">
+          <div class="menu-title">
+            <h4>${item.title}</h4>
+            <h4 class="price">${item.price}</h4>
+          </div>
+          <div class="menu-text">
+            ${item.desc}
+          </div>
+        </div>
+      </div>
+      `
+      }
+    });
+  
+}
+
+
+  // MENÜDEKİ ÜRÜNLERİN DETAYLARI
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", homePageMenuLoad)
+
+// function homePageMenuLoad(){
+//  menu.forEach(function(item){
+
+// homePage.innerHTML += `
+// <div class="menu-items col-lg-6 col-sm-12">
+// <img src="https://twoplaidaprons.com/wp-content/uploads/2020/09/tteokbokki-top-down-view-of-tteokbokki-in-a-bowl-500x500.jpg" class="photo" alt="">
+// <div class="menu-info">
+//   <div class="menu-title">
+//     <h4>Tteobbokki</h4>
+//     <h4 class="price">10.99</h4>
+//   </div>
+//   <div class="menu-text">
+//     Spicy rice cakes, serving with fish cake.
+//   </div>
+// </div>
+// </div>
+// `
+//  })
+// }
 
