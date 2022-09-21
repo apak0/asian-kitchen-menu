@@ -102,8 +102,7 @@ function menuBottonsAdd () {
   <button id="korea" class="korea btn btn-outline-dark me-3">Korea</button>
   <button id="japan" class="btn btn-outline-dark me-3">Japan</button>
   <button id="china" class="btn btn-outline-dark me-3">China</button>
-
-  `
+`
   
 }
 // Butonların değişkenlere atanması
