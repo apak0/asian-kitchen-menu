@@ -82,49 +82,160 @@ const menu = [
   },
 ];
 
-let copyMenuKorea = menu.filter(item => item.category ==="Korea")
-
-console.log(copyMenuKorea)
-
- 
-
-
-// MENÜ TÜRLERİNİN SEÇİLDİĞİ BUTONLAR
-
-const menuButtons = document.querySelector(".btn-container")
-document.addEventListener("DOMContentLoaded", menuBottonsAdd)
+// Sayfa ilk yüklendiğinde menüdeki bütün ürünleri gösterilmesini sağlayan event listener
 document.addEventListener("DOMContentLoaded", showAllMenu)
 
-function menuBottonsAdd () {
-  menuButtons.innerHTML +=
-  `
-  <button id="all" class="all btn btn-outline-dark me-3">All</button>
-  <button id="korea" class="korea btn btn-outline-dark me-3">Korea</button>
-  <button id="japan" class="btn btn-outline-dark me-3">Japan</button>
-  <button id="china" class="btn btn-outline-dark me-3">China</button>
-`
-  
-}
-// Butonların değişkenlere atanması
-const allBtn= document.querySelector("#all");
-const koreaBtn= document.querySelector("#korea");
-const japanBtn= document.querySelector("#japan");
-const chinaBtn= document.querySelector("#china");
+// Menüler için ayrı ayrı arraylerin oluşturulması
+let copyMenuKorea = menu.filter(item => item.category ==="Korea")
+let copyMenuJapan = menu.filter(item => item.category ==="Japan")
+let copyMenuChina = menu.filter(item => item.category ==="China")
 
-//Sayfanın bulunduğu div'in değişkene atanması
+//Yemkeklerin listeleneceği Sayfanın bulunduğu div'in değişkene atanması
 const homePage = document.querySelector(".section-center");
 
-// Butonlara click event eklenmesi
-allBtn.addEventListener("click", showAllMenu);
-koreaBtn.addEventListener("click", showKoreaMenu);
-japanBtn.addEventListener("click", showJapanMenu);
-chinaBtn.addEventListener("click", showChinaMenu);
+//Butonların oluşturulması ve butonlara event eklenmesi
+const menuButtons = document.querySelector(".btn-container")
+//All button Start
+// 1. Create button
+let allBtn = document.createElement("button");
+allBtn.innerHTML = "All";
+allBtn.className ="all btn btn-outline-dark me-3"
 
+// 2. Append somewhere
+menuButtons.appendChild(allBtn);
 
-// click event eklenen butonların fonksiyonlarının yazılması
+// 3. Add event handler
+allBtn.addEventListener ("click", function() {
+  homePage.innerHTML = ""
+  let allFood =  menu.map(function(item){
+   
+      homePage.innerHTML +=`
+    
+      <div class="menu-items col-lg-6 col-sm-12">
+      <img src="${item.img}" class="photo" alt="">
+      <div class="menu-info">
+        <div class="menu-title">
+          <h4>${item.title}</h4>
+          <h4 class="price">${item.price}</h4>
+        </div>
+        <div class="menu-text">
+          ${item.desc}
+        </div>
+      </div>
+    </div>
+      `
+  });
+});
+// All button END
+//////////////////////////////////////////////////////////////////////////////////////
+
+//Korea button Start
+// 1. Create button
+let koreaBtn = document.createElement("button");
+koreaBtn.innerHTML = "Korea";
+// koreaBtn.style.marginLeft= "15px";
+koreaBtn.className ="all btn btn-outline-dark me-3"
+// 2. Append somewhere
+menuButtons.appendChild(koreaBtn);
+
+// 3. Add event handler
+koreaBtn.addEventListener ("click", function() {
+  homePage.innerHTML = ""
+  let koreaFood =  menu.map(function(item){
+    if(item.category ==="Korea"){
+      homePage.innerHTML +=`
+    
+      <div class="menu-items col-lg-6 col-sm-12">
+      <img src="${item.img}" class="photo" alt="">
+      <div class="menu-info">
+        <div class="menu-title">
+          <h4>${item.title}</h4>
+          <h4 class="price">${item.price}</h4>
+        </div>
+        <div class="menu-text">
+          ${item.desc}
+        </div>
+      </div>
+    </div>
+      `
+    }
+  });
+});
+// Korea button END
+//////////////////////////////////////////////////////////////////////////////////////
+
+//Japan button Start
+// 1. Create button
+let japanBtn = document.createElement("button");
+japanBtn.innerHTML = "Japan";
+japanBtn.className ="all btn btn-outline-dark me-3"
+// 2. Append somewhere
+menuButtons.appendChild(japanBtn);
+
+// 3. Add event handler
+japanBtn.addEventListener ("click", function() {
+  homePage.innerHTML = ""
+  let japanFood =  menu.map(function(item){
+    if(item.category ==="Japan"){
+      homePage.innerHTML +=`
+    
+      <div class="menu-items col-lg-6 col-sm-12">
+      <img src="${item.img}" class="photo" alt="">
+      <div class="menu-info">
+        <div class="menu-title">
+          <h4>${item.title}</h4>
+          <h4 class="price">${item.price}</h4>
+        </div>
+        <div class="menu-text">
+          ${item.desc}
+        </div>
+      </div>
+    </div>
+      `
+    }
+  });
+});
+// China button END
+//////////////////////////////////////////////////////////////////////////////////////
+
+//All button Start
+// 1. Create button
+let chinaBtn = document.createElement("button");
+chinaBtn.innerHTML = "China";
+chinaBtn.className ="all btn btn-outline-dark me-3"
+// 2. Append somewhere
+menuButtons.appendChild(chinaBtn);
+
+// 3. Add event handler
+chinaBtn.addEventListener ("click", function() {
+  homePage.innerHTML = ""
+  let chinaFood =  menu.map(function(item){
+    if(item.category ==="China"){
+      homePage.innerHTML +=`
+    
+      <div class="menu-items col-lg-6 col-sm-12">
+      <img src="${item.img}" class="photo" alt="">
+      <div class="menu-info">
+        <div class="menu-title">
+          <h4>${item.title}</h4>
+          <h4 class="price">${item.price}</h4>
+        </div>
+        <div class="menu-text">
+          ${item.desc}
+        </div>
+      </div>
+    </div>
+      `
+    }
+  });
+});
+
+// China button END
+//////////////////////////////////////////////////////////////////////////////////////
+
+// Bütün menünün gösterilmesini sağlayan fonksiyon
 function showAllMenu (){
   const homePageFood = menu.map(function(item){
-  
     homePage.innerHTML +=`
     
     <div class="menu-items col-lg-6 col-sm-12">
@@ -140,122 +251,6 @@ function showAllMenu (){
     </div>
   </div>
     `
-    
   });
 }
-
-function showKoreaMenu (){
-  const copyMenuNew =  copyMenuKorea.map(function(item){
-    
-          homePage.innerHTML +=`
-          
-          <div class="menu-items col-lg-6 col-sm-12">
-          <img src="${item.img}" class="photo" alt="">
-          <div class="menu-info">
-            <div class="menu-title">
-              <h4>${item.title}</h4>
-              <h4 class="price">${item.price}</h4>
-            </div>
-            <div class="menu-text">
-              ${item.desc}
-            </div>
-          </div>
-        </div>
-          `
-        
-      });
-
-  console.log(e.target)
-  
-}
-
-function showJapanMenu (){
- 
-    const japanFoods = menu.map(function(item){
-      if(item.category === "Japan"){
-        homePage.innerHTML +=`
-        
-        <div class="menu-items col-lg-6 col-sm-12">
-        <img src="${item.img}" class="photo" alt="">
-        <div class="menu-info">
-          <div class="menu-title">
-            <h4>${item.title}</h4>
-            <h4 class="price">${item.price}</h4>
-          </div>
-          <div class="menu-text">
-            ${item.desc}
-          </div>
-        </div>
-      </div>
-      `
-      }
-    });
-  
-}
-
-function showChinaMenu (){
-  
-    const chinaFoods = menu.map(function(item){
-      if(item.category === "China"){
-        homePage.innerHTML +=`
-        
-        <div class="menu-items col-lg-6 col-sm-12">
-        <img src="${item.img}" class="photo" alt="">
-        <div class="menu-info">
-          <div class="menu-title">
-            <h4>${item.title}</h4>
-            <h4 class="price">${item.price}</h4>
-          </div>
-          <div class="menu-text">
-            ${item.desc}
-          </div>
-        </div>
-      </div>
-      `
-      }
-    });
-  
-}
-
-
-  // MENÜDEKİ ÜRÜNLERİN DETAYLARI
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", homePageMenuLoad)
-
-// function homePageMenuLoad(){
-//  menu.forEach(function(item){
-
-// homePage.innerHTML += `
-// <div class="menu-items col-lg-6 col-sm-12">
-// <img src="https://twoplaidaprons.com/wp-content/uploads/2020/09/tteokbokki-top-down-view-of-tteokbokki-in-a-bowl-500x500.jpg" class="photo" alt="">
-// <div class="menu-info">
-//   <div class="menu-title">
-//     <h4>Tteobbokki</h4>
-//     <h4 class="price">10.99</h4>
-//   </div>
-//   <div class="menu-text">
-//     Spicy rice cakes, serving with fish cake.
-//   </div>
-// </div>
-// </div>
-// `
-//  })
-// }
 
